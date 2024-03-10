@@ -6,7 +6,7 @@ The Genomics Annotation Service (GAS) is a capstone project designed to build a 
 
 Work flow diagram  
 
-<img width="634" alt="Screen Shot 2024-03-10 at 3 13 49 PM" src="https://github.com/joy06261985/genomics-annotation-service/assets/77443634/4da210be-c80d-4041-ab45-6635cf348a9f">
+<img width="1009" alt="Screen Shot 2024-03-10 at 3 13 49 PM" src="https://github.com/joy06261985/genomics-annotation-service/assets/77443634/4da210be-c80d-4041-ab45-6635cf348a9f">
 
 Directory contents are as follows:
 * `/web` - The GAS web app files
