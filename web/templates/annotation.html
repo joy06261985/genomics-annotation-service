@@ -1,0 +1,87 @@
+<!--
+annotation.html - Display details about a user's annotation job
+Copyright (C) 2015-2023 Vas Vasiliadis <vas@uchicago.edu>
+University of Chicago
+-->
+
+{% extends "base.html" %}
+
+{% block title %}Annotation Details{% endblock %}
+
+{% block body %}
+    
+    {% include "header.html" %}
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Annotation Details</h1>
+        </div>
+
+        <!-- Display Annotation Job Details -->
+        <dl class="dl-horizontal">
+            <dt>Request ID:</dt>
+            <dd>{{ job.job_id }}</dd>
+
+            <dt>Request Time:</dt>
+            <dd>{{ job.submit_time }}</dd>
+
+            <dt>VCF Input filename:</dt>
+            <dd>
+                <a href="{{ url_for('download_input', id=job.job_id) }}">
+                    {{ job.input_file_name }}
+                </a>
+            </dd>
+            
+            <dt>Status:</dt>
+            <dd>{{ job.job_status }}</dd>
+
+            {% if job.job_status == 'COMPLETED' %}
+            <dt>Complete Time:</dt>
+            <dd>{{ job.complete_time }}</dd>
+
+            <hr />
+
+            <dt>Annotated Results File:</dt>
+            <!-- <dd>
+                <a href="{{ url_for('download_results', id=job.job_id) }}">download</a>
+            </dd> -->
+            
+            <!-- <dd>
+                {% if job.results_file_archive_id %}
+                <a href="{{ url_for('make_me_premium') }}">upgrade to premium for download</a>
+                {% else %}
+                <a href="{{ url_for('download_results', id=job.job_id) }}">download</a>
+                {% endif %}
+            </dd> -->
+            <dd>
+                {% if job.thaw_status %}
+                    {% if job.thaw_status == 'PENDING' %}
+                        {% if job.thaw_type == 'Expedited' %}
+                            File is being expedited restored; please check back in a few minutes.
+                        {% elif job.thaw_type == 'Standard' %}
+                            File is being standard restored; please check back in a few hours.
+                        {% else %}
+                            File is being restored; please check back later.
+                        {% endif %}
+                    {% elif job.thaw_status == 'COMPLETED' %}
+                        <a href="{{ url_for('download_results', id=job.job_id) }}">download</a>
+                    {% endif %}
+                {% elif job.results_file_archive_id %}
+                    <a href="{{ url_for('subscribe') }}">upgrade to premium for download</a>
+                {% else %}
+                    <a href="{{ url_for('download_results', id=job.job_id) }}">download</a>
+                {% endif %}
+            </dd>
+
+            <dt>Annotation Log File:</dt>
+            <dd>
+                <a href="{{ url_for('annotation_log', id=job.job_id) }}">view</a>
+            </dd>
+            {% endif %}
+        </dl>
+
+        <hr />
+        <a href="{{ url_for('annotations_list') }}">&larr; back to annotations list</a>
+    </div> <!-- container -->
+
+{% endblock %}

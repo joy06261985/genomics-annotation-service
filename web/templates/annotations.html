@@ -1,0 +1,58 @@
+<!--
+annotations.html - Display a list of user annotation jobs with links to details for each job
+Copyright (C) 2015-2023 Vas Vasiliadis <vas@uchicago.edu>
+University of Chicago
+-->
+
+{% extends "base.html" %}
+
+{% block title %}Annotations{% endblock %}
+
+{% block body %}
+
+    {% include "header.html" %}
+
+    <div class="container">
+
+        <div class="page-header">
+            <h1>My Annotations</h1>
+        </div>
+
+        <div class="row text-right">
+            <a href="{{ url_for('annotate') }}" title="Request New Annotation">
+                <button type="button" class="btn btn-link" aria-label="Request New Annotation">
+                    <i class="fa fa-plus fa-lg"></i> Request New Annotation
+                </button>
+            </a>
+        </div>
+
+        <!-- DISPLAY LIST OF ANNOTATION JOBS -->
+        <!-- Check if there are no jobs -->
+        {% if no_jobs_found %}
+            <p>No annotations found.</p>
+        {% else %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Request ID</th>
+                        <th>Request Time</th>
+                        <th>VCF File Name</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Loop over each annotation job and display its details -->
+                    {% for job in annotations %}
+                    <tr>
+                        <td><a href="{{ url_for('annotation_details', id=job.job_id) }}">{{ job.job_id }}</a></td>
+                        <td>{{ job.submit_time_cst }}</td>
+                        <td>{{ job.input_file_name }}</td>
+                        <td>{{ job.job_status }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div> <!-- container -->
+
+{% endblock %}

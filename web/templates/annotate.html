@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}Annotate{% endblock %}
+
+{% block body %}
+
+    {% include "header.html" %}
+
+    <div class="container">
+    
+        <div class="page-header">
+            <h1>Annotate VCF File</h1>
+        </div>
+
+        <div class="form-wrapper">
+            <form role="form" action="{{ s3_post.url }}" method="post" enctype="multipart/form-data" id="annotate-form">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                {% for key, value in s3_post.fields.items() %}
+                <input type="hidden" name="{{ key }}" value="{{ value }}" />
+                {% endfor %}
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="upload">Select VCF Input File</label>
+                        <div class="input-group col-md-12">
+                            <span class="input-group-btn">
+                                <span class="btn btn-default btn-file btn-lg">Browse&hellip; <input type="file" name="file" id="upload-file" /></span>
+                            </span>
+                            <input type="text" class="form-control col-md-6 input-lg" readonly />
+                        </div>
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="form-actions">
+                    <input class="btn btn-lg btn-primary" type="submit" value="Annotate" id="annotateButton" disabled />
+                </div>
+            </form>
+        </div>
+
+        <script>
+            document.getElementById('upload-file').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (!file) {
+                    document.getElementById('annotateButton').disabled = true;
+                    return;
+                }
+        
+                // Update the text field with the name of the file
+                document.querySelector('.form-control').value = file.name;
+        
+                // Determine user role
+                const userRole = "{{ role }}";
+                const fileSize = file.size / 1024; 
+                const maxFileSize = 150; 
+        
+                // Reset any previous error state
+                // Enable the submit button by default
+                document.getElementById('annotateButton').disabled = false; 
+        
+                // Enforce file size limit for free users only
+                if (userRole === 'free_user' && fileSize > maxFileSize) {
+                    alert('File size exceeds the 150KB limit for free users. Please subscribe to upload larger files.');
+                    // Disable the submit button
+                    document.getElementById('annotateButton').disabled = true; 
+                    // Reset the file input to no file selected
+                    e.target.value = ''; 
+                }
+            });
+        
+            // Additional safety check to disable the button initially or if no file is selected
+            document.getElementById('annotate-form').addEventListener('submit', function(e) {
+                const fileInput = document.getElementById('upload-file');
+                if (!fileInput.value || document.getElementById('annotateButton').disabled) {
+                    e.preventDefault(); 
+                    alert('Please select a file to annotate.');
+                }
+            });
+        </script>
+    
+    </div> <!-- container -->
+
+{% endblock %}
