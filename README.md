@@ -27,6 +27,26 @@ Directory contents are as follows:
 - **Web Application:** Allows users to interact with the GAS through a web interface.
 - **Message Queues and Notification Topics:** Coordinate system activities and user notifications.
 
+## Technology Stack
+
+- **Cloud Platform:** Amazon Web Services (AWS)
+- **Compute:** AWS EC2 (Elastic Compute Cloud) for server instances
+- **Storage:** 
+  - S3 (Simple Storage Service) for object storage
+  - Glacier for archival storage
+  - DynamoDB for key-value data
+  - RDS (Relational Database Service) for relational data
+- **Web Server:** Flask framework (enhanced version for this project)
+- **User Authentication:** Globus Auth
+- **Frontend:** HTML, CSS (Bootstrap), JavaScript
+- **Backend:** Python
+- **Task Queues:** AWS SQS (Simple Queue Service)
+- **Notification Service:** AWS SNS (Simple Notification Service)
+- **Load Balancer:** AWS ELB (Elastic Load Balancer)
+- **Auto Scaling:** AWS EC2 Auto Scaling
+- **Security:** HTTPS, SSL/TLS
+- **Monitoring:** AWS CloudWatch
+
 ## Web Framework
 
 The project utilizes an enhanced version of the Flask framework for the web interface, offering styled web pages and a modular template structure for ease of development and user interaction.
