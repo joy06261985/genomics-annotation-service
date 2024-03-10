@@ -4,7 +4,8 @@
 
 The Genomics Annotation Service (GAS) is a capstone project designed to build a fully functional software-as-a-service platform for genomics annotation. This service leverages various cloud services running on Amazon Web Services (AWS) to provide a robust, scalable, and secure platform for genomic data processing and annotation.
 
-Work flow diagram
+Work flow diagram  
+
 <img width="634" alt="Screen Shot 2024-03-10 at 3 13 49 PM" src="https://github.com/joy06261985/genomics-annotation-service/assets/77443634/4da210be-c80d-4041-ab45-6635cf348a9f">
 
 Directory contents are as follows:
