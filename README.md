@@ -1,17 +1,14 @@
-# GAS Framework
+# Genomics Annotation Service (GAS)
+
+## Overview
+
+The Genomics Annotation Service (GAS) is a capstone project designed to build a fully functional software-as-a-service platform for genomics annotation. This service leverages various cloud services running on Amazon Web Services (AWS) to provide a robust, scalable, and secure platform for genomic data processing and annotation.
 
 Directory contents are as follows:
 * `/web` - The GAS web app files
 * `/ann` - Annotator files
 * `/util` - Utility scripts/apps for notifications, archival, and restoration
 * `/aws` - AWS user data files
-
-
-# Genomics Annotation Service (GAS)
-
-## Overview
-
-The Genomics Annotation Service (GAS) is a capstone project designed to build a fully functional software-as-a-service platform for genomics annotation. This service leverages various cloud services running on Amazon Web Services (AWS) to provide a robust, scalable, and secure platform for genomic data processing and annotation.
 
 ## Key Features
 
